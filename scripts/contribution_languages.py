@@ -148,18 +148,57 @@ print("=" * 60)
 print("EXTERNAL REPOSITORIES")
 print("=" * 60)
 
+all_languages = {}
+
 for full_name, repo in sorted(
     repositories.items(),
     key=lambda item: item[1]["commits"],
     reverse=True
 ):
 
-    dates = repo["dates"]
-
-    first_date = min(dates) if dates else "N/A"
-    last_date = max(dates) if dates else "N/A"
+    owner = repo["owner"]
+    name = repo["name"]
 
     print(f"\n{full_name}")
     print(f"  Commits: {repo['commits']}")
-    print(f"  Primera contribución: {first_date}")
-    print(f"  Última contribución: {last_date}")
+
+    languages = get_languages(owner, name)
+
+    print("  Languages:")
+
+    for language, bytes_count in languages.items():
+
+        print(
+            f"    {language}: "
+            f"{bytes_count:,} bytes"
+        )
+
+        if language not in all_languages:
+            all_languages[language] = 0
+
+        all_languages[language] += bytes_count
+
+
+print("\n")
+print("=" * 60)
+print("LANGUAGES")
+print("=" * 60)
+
+total_bytes = sum(all_languages.values())
+
+for language, bytes_count in sorted(
+    all_languages.items(),
+    key=lambda item: item[1],
+    reverse=True
+):
+
+    percentage = (
+        bytes_count / total_bytes * 100
+        if total_bytes > 0
+        else 0
+    )
+
+    print(
+        f"{language}: "
+        f"{percentage:.2f}%"
+    )
