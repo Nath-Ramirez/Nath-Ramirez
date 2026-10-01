@@ -125,6 +125,8 @@ while current_start < END_DATE:
     )
 
     for item in collection["commitContributionsByRepository"]:
+    
+        repo = item["repository"]
 
         if repo["isPrivate"]:
             continue
@@ -134,8 +136,6 @@ while current_start < END_DATE:
         
         if repo["owner"].lower() == USERNAME.lower():
             continue
-    
-        repo = item["repository"]
 
         owner = repo["owner"]["login"]
         name = repo["name"]
