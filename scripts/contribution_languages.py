@@ -1,5 +1,7 @@
 import requests
+import os
 
+TOKEN = os.getenv("GITHUB_TOKEN")
 USERNAME = "Nath-Ramirez"
 
 GRAPHQL_URL = "https://api.github.com/graphql"
@@ -33,6 +35,9 @@ response = requests.post(
         "variables": {
             "login": USERNAME
         }
+    },
+    headers={
+        "Authorization": f"Bearer {TOKEN}"
     }
 )
 
