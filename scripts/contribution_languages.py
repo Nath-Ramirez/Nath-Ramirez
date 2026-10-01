@@ -128,6 +128,9 @@ while current_start < END_DATE:
     
         repo = item["repository"]
 
+        owner = repo["owner"]["login"]
+        name = repo["name"]
+
         if repo["isPrivate"]:
             continue
         
@@ -136,10 +139,7 @@ while current_start < END_DATE:
         
         if repo["owner"].lower() == USERNAME.lower():
             continue
-
-        owner = repo["owner"]["login"]
-        name = repo["name"]
-
+            
         full_name = f"{owner}/{name}"
 
         if full_name not in repositories:
