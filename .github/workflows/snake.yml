@@ -21,8 +21,8 @@ jobs:
         with:
           github_user_name: Nath-Ramirez
           outputs: |
-            dist/github-contribution-snake.svg?color_snake=%238CE3FF
-            dist/github-contribution-snake-dark.svg?palette=github-dark&color_snake=%238CE3FF
+            dist/github-contribution-snake.svg?color_snake=%238CE3FF&color_dots=%231B1230,%2335225C,%235B3A8C,%238A5CCF,%23C7A6FF
+            dist/github-contribution-snake-dark.svg?palette=github-dark&color_snake=%238CE3FF&color_dots=%231B1230,%2335225C,%235B3A8C,%238A5CCF,%23C7A6FF
 
       - name: Push Snake to output branch
         uses: crazy-max/ghaction-github-pages@v4
