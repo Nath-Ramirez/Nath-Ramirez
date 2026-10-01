@@ -125,21 +125,21 @@ while current_start < END_DATE:
     )
 
     for item in collection["commitContributionsByRepository"]:
-    
-        repo = item["repository"]
 
+        repo = item["repository"]
+    
         owner = repo["owner"]["login"]
         name = repo["name"]
-
+    
         if repo["isPrivate"]:
             continue
-        
+    
         if repo["isFork"]:
             continue
-        
-        if repo["owner"].lower() == USERNAME.lower():
+    
+        if owner.lower() == USERNAME.lower():
             continue
-            
+    
         full_name = f"{owner}/{name}"
 
         if full_name not in repositories:
