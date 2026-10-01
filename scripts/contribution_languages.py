@@ -71,6 +71,25 @@ def get_contributions():
     return data["data"]["user"]["contributionsCollection"]
 
 
+def get_languages(owner, repo):
+
+    url = f"https://api.github.com/repos/{owner}/{repo}/languages"
+
+    response = requests.get(
+        url,
+        headers=HEADERS
+    )
+
+    if response.status_code != 200:
+        print(
+            f"Error obteniendo lenguajes de "
+            f"{owner}/{repo}: {response.status_code}"
+        )
+        return {}
+
+    return response.json()
+    
+
 # --------------------------------------------------
 # Obtener contribuciones
 # --------------------------------------------------
