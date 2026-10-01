@@ -82,6 +82,9 @@ for item in repositories:
     if repo["isFork"]:
         continue
 
+    if repo["owner"]["login"].lower() == USERNAME.lower():
+        continue
+        
     contributions = item["contributions"]["nodes"]
 
     total_commits = sum(
