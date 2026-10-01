@@ -126,6 +126,15 @@ while current_start < END_DATE:
 
     for item in collection["commitContributionsByRepository"]:
 
+        if repo["isPrivate"]:
+            continue
+        
+        if repo["isFork"]:
+            continue
+        
+        if repo["owner"].lower() == USERNAME.lower():
+            continue
+    
         repo = item["repository"]
 
         owner = repo["owner"]["login"]
