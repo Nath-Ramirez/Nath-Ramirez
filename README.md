@@ -127,6 +127,10 @@ _________________________________
 </div>
 
 <div align="center">
+  <img src="https://raw.githubusercontent.com/Nath-Ramirez/Nath-Ramirez/output/contribution-languages.svg"
+       alt="Contribution Languages">
+</div>
+<div align="center">
 <img src="https://streak-stats.demolab.com/?user=Nath-Ramirez&theme=tokyonight&hide_border=true&background=135,0D1117,101827,0D1117&ring=8CE3FF&fire=8CE3FF&currStreakLabel=8CE3FF&sideLabels=FFFFFF&dates=FFFFFF" />
 </div>
 
