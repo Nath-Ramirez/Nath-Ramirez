@@ -10,7 +10,9 @@
 * Relevant Coursework: Artificial Intelligence, Data Science, Software Engineering, Telematics, Computer Graphics
 * Previously worked at: Intership in Genius Sports
 * Languages: Native Spanish, B1 English
-----
+
+
+
 
 ## `$ cat tech-stack.yaml`
 <div align=center>
@@ -134,4 +136,16 @@ _________________________________
 <div align="center">
   <img src="https://raw.githubusercontent.com/Nath-Ramirez/Nath-Ramirez/output/github-contribution-snake-dark.svg"
        alt="GitHub Contribution Snake">
+</div>
+
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"><br><br>
+
+
+## `$ connect --socials`
+
+<div align="center">
+	<a 
+		href="www.linkedin.com/in/nathaly-ramirez-henao" target="blank"><img align="center" src="https://user-images.githubusercontent.com/88904952/234979284-68c11d7f-1acc-4f0c-ac78-044e1037d7b0.png" alt="linkedin"height="50"width="50"/>	
+	</a>
 </div>
