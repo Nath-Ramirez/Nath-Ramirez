@@ -1,57 +1,49 @@
 import os
 import requests
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 USERNAME = "Nath-Ramirez"
-GRAPHQL_URL = "https://api.github.com/graphql"
-
 TOKEN = os.getenv("GITHUB_TOKEN")
 
 if not TOKEN:
-    print("Error: GITHUB_TOKEN no está configurado.")
+    print("ERROR: GITHUB_TOKEN no está configurado.")
     exit()
 
+URL = "https://api.github.com/graphql"
 
-query = """
+HEADERS = {
+    "Authorization": f"Bearer {TOKEN}"
+}
+
+QUERY = """
 query(
     $login: String!,
     $from: DateTime!,
-    $to: DateTime!,
-    $after: String
+    $to: DateTime!
 ) {
     user(login: $login) {
-
         contributionsCollection(
             from: $from
             to: $to
         ) {
-
             startedAt
             endedAt
-
             totalCommitContributions
             totalRepositoriesWithContributedCommits
 
             commitContributionsByRepository(
                 maxRepositories: 100
             ) {
-
                 repository {
                     name
-
                     owner {
                         login
                     }
-
                     isFork
                     isPrivate
                 }
 
-                contributions(
-                    first: 100
-                    after: $after
-                ) {
-
+                contributions(first: 100) {
                     nodes {
                         commitCount
                         occurredAt
@@ -59,7 +51,6 @@ query(
 
                     pageInfo {
                         hasNextPage
-                        endCursor
                     }
                 }
             }
@@ -69,185 +60,141 @@ query(
 """
 
 
-# --------------------------------------------------
-# PERÍODO QUE QUEREMOS CONSULTAR
-# --------------------------------------------------
+def get_contributions(from_date, to_date):
 
-FROM_DATE = "2025-01-01T00:00:00Z"
-
-TO_DATE = datetime.now(timezone.utc).strftime(
-    "%Y-%m-%dT%H:%M:%SZ"
-)
-
-
-# --------------------------------------------------
-# FUNCIÓN PARA HACER LA PETICIÓN
-# --------------------------------------------------
-
-def get_contributions(after=None):
+    variables = {
+        "login": USERNAME,
+        "from": from_date,
+        "to": to_date
+    }
 
     response = requests.post(
-        GRAPHQL_URL,
-
+        URL,
         json={
-            "query": query,
-
-            "variables": {
-                "login": USERNAME,
-                "from": FROM_DATE,
-                "to": TO_DATE,
-                "after": after
-            }
+            "query": QUERY,
+            "variables": variables
         },
-
-        headers={
-            "Authorization": f"Bearer {TOKEN}"
-        }
+        headers=HEADERS
     )
-
-    if response.status_code != 200:
-
-        print("Error:", response.status_code)
-        print(response.text)
-
-        exit()
 
     data = response.json()
 
     if "errors" in data:
-
         print("GraphQL errors:")
-
         for error in data["errors"]:
             print(error["message"])
-
         exit()
 
     return data["data"]["user"]["contributionsCollection"]
 
 
 # --------------------------------------------------
-# OBTENER TODOS LOS REPOSITORIOS
+# Buscar todo el historial en bloques de 3 meses
 # --------------------------------------------------
+
+START_DATE = datetime(2025, 1, 1, tzinfo=timezone.utc)
+END_DATE = datetime.now(timezone.utc)
 
 repositories = {}
 
-cursor = None
+current_start = START_DATE
 
-while True:
+while current_start < END_DATE:
 
-    collection = get_contributions(cursor)
+    # Aproximadamente 3 meses
+    current_end = current_start + timedelta(days=90)
+
+    if current_end > END_DATE:
+        current_end = END_DATE
+
+    from_date = current_start.strftime("%Y-%m-%dT%H:%M:%SZ")
+    to_date = current_end.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    print(f"\nConsultando: {from_date} → {to_date}")
+
+    collection = get_contributions(from_date, to_date)
+
+    print(
+        f"  Commits registrados: "
+        f"{collection['totalCommitContributions']}"
+    )
+
+    print(
+        f"  Repositorios: "
+        f"{collection['totalRepositoriesWithContributedCommits']}"
+    )
 
     for item in collection["commitContributionsByRepository"]:
 
         repo = item["repository"]
 
-        repo_key = (
-            f'{repo["owner"]["login"]}/{repo["name"]}'
-        )
+        owner = repo["owner"]["login"]
+        name = repo["name"]
 
-        if repo_key not in repositories:
+        full_name = f"{owner}/{name}"
 
-            repositories[repo_key] = {
-                "owner": repo["owner"]["login"],
-                "name": repo["name"],
-                "isFork": repo["isFork"],
-                "isPrivate": repo["isPrivate"],
+        if full_name not in repositories:
+            repositories[full_name] = {
+                "owner": owner,
+                "name": name,
                 "commits": 0,
-                "dates": []
+                "dates": [],
+                "isPrivate": repo["isPrivate"],
+                "isFork": repo["isFork"]
             }
+
+        repo_data = repositories[full_name]
 
         contributions = item["contributions"]
 
         for contribution in contributions["nodes"]:
 
-            repositories[repo_key]["commits"] += (
-                contribution["commitCount"]
-            )
+            repo_data["commits"] += contribution["commitCount"]
 
-            repositories[repo_key]["dates"].append(
+            repo_data["dates"].append(
                 contribution["occurredAt"]
             )
 
-        page_info = contributions["pageInfo"]
+        if contributions["pageInfo"]["hasNextPage"]:
+            print(
+                f"  WARNING: {full_name} tiene más de "
+                f"100 días de contribuciones en este período."
+            )
 
-        if page_info["hasNextPage"]:
-
-            # Continuamos con la siguiente página
-            cursor = page_info["endCursor"]
-
-        else:
-
-            break
-
-    else:
-
-        # Este else pertenece al for.
-        # Si terminó normalmente, salimos del while.
-        break
+    current_start = current_end
 
 
 # --------------------------------------------------
-# MOSTRAR INFORMACIÓN GENERAL
+# Mostrar resultados
 # --------------------------------------------------
 
-print()
+print("\n")
 print("=" * 60)
 print("CONTRIBUTIONS COLLECTION")
 print("=" * 60)
 
-print(
-    f'Periodo: {collection["startedAt"]} → '
-    f'{collection["endedAt"]}'
-)
+print(f"Usuario: {USERNAME}")
+print(f"Periodo: {START_DATE.date()} → {END_DATE.date()}")
 
-print(
-    f'Total commits registrados: '
-    f'{collection["totalCommitContributions"]}'
-)
-
-print(
-    f'Repositorios con commits: '
-    f'{collection["totalRepositoriesWithContributedCommits"]}'
-)
-
-print()
-
-
-# --------------------------------------------------
-# MOSTRAR REPOSITORIOS
-# --------------------------------------------------
-
+print("\n")
 print("=" * 60)
 print("REPOSITORIES")
 print("=" * 60)
 
-for repo_key, repo in repositories.items():
+for full_name, repo in sorted(
+    repositories.items(),
+    key=lambda item: item[1]["commits"],
+    reverse=True
+):
 
-    dates = sorted(repo["dates"])
+    dates = repo["dates"]
 
-    first_date = dates[0] if dates else "N/A"
-    last_date = dates[-1] if dates else "N/A"
+    first_date = min(dates) if dates else "N/A"
+    last_date = max(dates) if dates else "N/A"
 
-    print()
-    print(repo_key)
-
-    print(
-        f'  Commits: {repo["commits"]}'
-    )
-
-    print(
-        f'  Primera contribución: {first_date}'
-    )
-
-    print(
-        f'  Última contribución: {last_date}'
-    )
-
-    print(
-        f'  Privado: {repo["isPrivate"]}'
-    )
-
-    print(
-        f'  Fork: {repo["isFork"]}'
-    )
+    print(f"\n{full_name}")
+    print(f"  Commits: {repo['commits']}")
+    print(f"  Primera contribución: {first_date}")
+    print(f"  Última contribución: {last_date}")
+    print(f"  Privado: {repo['isPrivate']}")
+    print(f"  Fork: {repo['isFork']}")
