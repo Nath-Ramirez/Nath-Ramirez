@@ -90,7 +90,7 @@ def get_languages(owner, repo):
     return response.json()
     
 
-def generate_svg(languages, output_file="contribution-languages.svg"):
+def generate_svg(languages, output_file="dist/contribution-languages.svg"):
 
     width = 900
     height = 320
@@ -263,6 +263,11 @@ def generate_svg(languages, output_file="contribution-languages.svg"):
 
     svg += "</svg>"
 
+    os.makedirs(
+    os.path.dirname(output_file),
+    exist_ok=True
+    )
+    
     with open(output_file, "w", encoding="utf-8") as file:
         file.write(svg)
 
