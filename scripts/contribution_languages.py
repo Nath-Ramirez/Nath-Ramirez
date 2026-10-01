@@ -73,7 +73,7 @@ query(
 # PERÍODO QUE QUEREMOS CONSULTAR
 # --------------------------------------------------
 
-FROM_DATE = "2020-01-01T00:00:00Z"
+FROM_DATE = "2025-01-01T00:00:00Z"
 
 TO_DATE = datetime.now(timezone.utc).strftime(
     "%Y-%m-%dT%H:%M:%SZ"
