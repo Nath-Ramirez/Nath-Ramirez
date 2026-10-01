@@ -129,4 +129,9 @@ _________________________________
 </div>
 
 
+## `$ ./contributions`
 
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Nath-Ramirez/Nath-Ramirez/output/github-contribution-snake-dark.svg"
+       alt="GitHub Contribution Snake">
+</div>
