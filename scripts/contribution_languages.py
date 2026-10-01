@@ -1,10 +1,15 @@
-import requests
 import os
+import requests
 
-TOKEN = os.getenv("GITHUB_TOKEN")
 USERNAME = "Nath-Ramirez"
 
 GRAPHQL_URL = "https://api.github.com/graphql"
+
+TOKEN = os.getenv("GITHUB_TOKEN")
+
+if not TOKEN:
+    print("Error: GITHUB_TOKEN no está configurado.")
+    exit()
 
 query = """
 query($login: String!) {
@@ -19,8 +24,12 @@ query($login: String!) {
           isFork
           isPrivate
         }
+
         contributions(first: 100) {
-          totalCount
+          nodes {
+            commitCount
+            occurredAt
+          }
         }
       }
     }
@@ -50,8 +59,10 @@ data = response.json()
 
 if "errors" in data:
     print("GraphQL errors:")
+
     for error in data["errors"]:
         print(error["message"])
+
     exit()
 
 repositories = (
@@ -62,6 +73,7 @@ repositories = (
 )
 
 for item in repositories:
+
     repo = item["repository"]
 
     if repo["isPrivate"]:
@@ -70,7 +82,14 @@ for item in repositories:
     if repo["isFork"]:
         continue
 
+    contributions = item["contributions"]["nodes"]
+
+    total_commits = sum(
+        contribution["commitCount"]
+        for contribution in contributions
+    )
+
     print(
         f'{repo["owner"]["login"]}/{repo["name"]}'
-        f' → {item["contributions"]["totalCount"]} commits'
+        f' → {total_commits} commits'
     )
