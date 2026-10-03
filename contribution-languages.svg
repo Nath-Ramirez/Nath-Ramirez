@@ -1,0 +1,237 @@
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="900"
+        height="320"
+        viewBox="0 0 900 320">
+
+        <rect
+            width="100%"
+            height="100%"
+            rx="16"
+            fill="#0D1117"/>
+
+        <text
+            x="40"
+            y="45"
+            fill="#8CE3FF"
+            font-family="monospace"
+            font-size="22"
+            font-weight="bold">
+            CONTRIBUTION LANGUAGES
+        </text>
+
+        <text
+            x="40"
+            y="70"
+            fill="#9CA3AF"
+            font-family="monospace"
+            font-size="12">
+            PUBLIC REPOSITORIES I CONTRIBUTED TO
+        </text>
+    
+        <circle
+            cx="200"
+            cy="185"
+            r="80"
+            fill="none"
+            stroke="#8CE3FF"
+            stroke-width="28"
+            stroke-dasharray="233.07030319265237 269.5845213817476"
+            stroke-dashoffset="0"
+            transform="rotate(-90 200 185)"/>
+        
+        <circle
+            cx="200"
+            cy="185"
+            r="80"
+            fill="none"
+            stroke="#C7A6FF"
+            stroke-width="28"
+            stroke-dasharray="164.38187017159876 338.27295440280125"
+            stroke-dashoffset="-233.07030319265237"
+            transform="rotate(-90 200 185)"/>
+        
+        <circle
+            cx="200"
+            cy="185"
+            r="80"
+            fill="none"
+            stroke="#6E9CFF"
+            stroke-width="28"
+            stroke-dasharray="83.64810939732968 419.0067151770703"
+            stroke-dashoffset="-397.45217336425117"
+            transform="rotate(-90 200 185)"/>
+        
+        <circle
+            cx="200"
+            cy="185"
+            r="80"
+            fill="none"
+            stroke="#B58CFF"
+            stroke-width="28"
+            stroke-dasharray="19.80399297267794 482.85083160172206"
+            stroke-dashoffset="-481.10028276158084"
+            transform="rotate(-90 200 185)"/>
+        
+        <circle
+            cx="200"
+            cy="185"
+            r="80"
+            fill="none"
+            stroke="#5BC0EB"
+            stroke-width="28"
+            stroke-dasharray="1.7505488401412181 500.90427573425876"
+            stroke-dashoffset="-500.90427573425876"
+            transform="rotate(-90 200 185)"/>
+        
+        <text
+            x="200"
+            y="181"
+            text-anchor="middle"
+            fill="#FFFFFF"
+            font-family="monospace"
+            font-size="20"
+            font-weight="bold">
+            5
+        </text>
+
+        <text
+            x="200"
+            y="203"
+            text-anchor="middle"
+            fill="#9CA3AF"
+            font-family="monospace"
+            font-size="11">
+            LANGUAGES
+        </text>
+    
+        <circle
+            cx="360"
+            cy="115"
+            r="5"
+            fill="#8CE3FF"/>
+
+        <text
+            x="376"
+            y="120"
+            fill="#FFFFFF"
+            font-family="monospace"
+            font-size="14">
+            JavaScript
+        </text>
+
+        <text
+            x="820"
+            y="120"
+            text-anchor="end"
+            fill="#8CE3FF"
+            font-family="monospace"
+            font-size="14"
+            font-weight="bold">
+            46.37%
+        </text>
+        
+        <circle
+            cx="360"
+            cy="151"
+            r="5"
+            fill="#C7A6FF"/>
+
+        <text
+            x="376"
+            y="156"
+            fill="#FFFFFF"
+            font-family="monospace"
+            font-size="14">
+            Python
+        </text>
+
+        <text
+            x="820"
+            y="156"
+            text-anchor="end"
+            fill="#C7A6FF"
+            font-family="monospace"
+            font-size="14"
+            font-weight="bold">
+            32.70%
+        </text>
+        
+        <circle
+            cx="360"
+            cy="187"
+            r="5"
+            fill="#6E9CFF"/>
+
+        <text
+            x="376"
+            y="192"
+            fill="#FFFFFF"
+            font-family="monospace"
+            font-size="14">
+            TypeScript
+        </text>
+
+        <text
+            x="820"
+            y="192"
+            text-anchor="end"
+            fill="#6E9CFF"
+            font-family="monospace"
+            font-size="14"
+            font-weight="bold">
+            16.64%
+        </text>
+        
+        <circle
+            cx="360"
+            cy="223"
+            r="5"
+            fill="#B58CFF"/>
+
+        <text
+            x="376"
+            y="228"
+            fill="#FFFFFF"
+            font-family="monospace"
+            font-size="14">
+            CSS
+        </text>
+
+        <text
+            x="820"
+            y="228"
+            text-anchor="end"
+            fill="#B58CFF"
+            font-family="monospace"
+            font-size="14"
+            font-weight="bold">
+            3.94%
+        </text>
+        
+        <circle
+            cx="360"
+            cy="259"
+            r="5"
+            fill="#5BC0EB"/>
+
+        <text
+            x="376"
+            y="264"
+            fill="#FFFFFF"
+            font-family="monospace"
+            font-size="14">
+            HTML
+        </text>
+
+        <text
+            x="820"
+            y="264"
+            text-anchor="end"
+            fill="#5BC0EB"
+            font-family="monospace"
+            font-size="14"
+            font-weight="bold">
+            0.35%
+        </text>
+        </svg>
