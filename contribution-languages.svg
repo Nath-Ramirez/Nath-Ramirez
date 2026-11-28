@@ -1,0 +1,89 @@
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="900"
+        height="320"
+        viewBox="0 0 900 320">
+
+        <rect
+            width="100%"
+            height="100%"
+            rx="16"
+            fill="#0D1117"/>
+
+        <text
+            x="40"
+            y="45"
+            fill="#8CE3FF"
+            font-family="monospace"
+            font-size="22"
+            font-weight="bold">
+            CONTRIBUTION LANGUAGES
+        </text>
+
+        <text
+            x="40"
+            y="70"
+            fill="#9CA3AF"
+            font-family="monospace"
+            font-size="12">
+            PUBLIC REPOSITORIES I CONTRIBUTED TO
+        </text>
+    
+        <circle
+            cx="200"
+            cy="185"
+            r="80"
+            fill="none"
+            stroke="#C7A6FF"
+            stroke-width="28"
+            stroke-dasharray="502.6548245744 0.0"
+            stroke-dashoffset="0"
+            transform="rotate(-90 200 185)"/>
+        
+        <text
+            x="200"
+            y="181"
+            text-anchor="middle"
+            fill="#FFFFFF"
+            font-family="monospace"
+            font-size="20"
+            font-weight="bold">
+            1
+        </text>
+
+        <text
+            x="200"
+            y="203"
+            text-anchor="middle"
+            fill="#9CA3AF"
+            font-family="monospace"
+            font-size="11">
+            LANGUAGES
+        </text>
+    
+        <circle
+            cx="360"
+            cy="115"
+            r="5"
+            fill="#C7A6FF"/>
+
+        <text
+            x="376"
+            y="120"
+            fill="#FFFFFF"
+            font-family="monospace"
+            font-size="14">
+            Python
+        </text>
+
+        <text
+            x="820"
+            y="120"
+            text-anchor="end"
+            fill="#C7A6FF"
+            font-family="monospace"
+            font-size="14"
+            font-weight="bold">
+            100.00%
+        </text>
+        </svg>
